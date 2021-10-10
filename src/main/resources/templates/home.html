@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Cake System</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+	<div class="container-fluid">
+		<h3>ระบบสั่งจองเค้ก</h3>
+		<hr>
+
+		<a class="btn btn-primary btn-sm mb-3">Add Product</a> <br /> <br />
+		
+		<!--navbar-->
+	<nav class="navbar navbar-warning bg-warning">
+		<div class="container">
+			<a class="navbar-brand"><b>ระบบซื้อขาย Bigbike.</b> (600CC Class อิอิ)</a>
+
+			<form class="d-flex" th:action="@{/}">
+				<input class="form-control me-2" type="text" name="keyword" id="keyword" size="50"
+					th:value="${keyword}" />
+				<input type="submit" class="btn btn-primary" value="Search" />&lt;<input type="button" class="btn btn-danger" value="Clear" onclick="clearSearch()"/>
+			</form>
+
+		</div>
+	</nav>
+		<br/> <br/>
+
+		<table class="table table-striped table-hover table-bordered">
+			<thead class="table-dark">
+				<tr class ="text-center">
+					<th>Name</th>
+					<th>Description</th>
+					<th>Price</th>
+					<th>Image</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="tmpProduct : ${products}">
+					<td th:text="${tmpProduct.product_name}"></td>
+					<td th:text="${tmpProduct.product_description}"></td>
+					<td th:text="${tmpProduct.product_price}"></td>
+					<td><img th:src="@{'/image/' + ${tmpProduct.product_image}}"
+						style="width: 40px; height: 40px;"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script type="text/javascript">
+		function clearSearch() {
+			window.location = "[[@{/}]]";
+		}
+	</script>
+</body>
+</html>
